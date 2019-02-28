@@ -1,4 +1,4 @@
-package main.java.HashCode;
+package HashCode;
 
 public class Slide {
 

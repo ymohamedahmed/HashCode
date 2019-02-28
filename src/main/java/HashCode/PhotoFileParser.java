@@ -1,4 +1,4 @@
-package Main.java.HashCode;
+package HashCode;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
