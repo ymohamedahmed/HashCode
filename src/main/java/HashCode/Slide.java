@@ -1,4 +1,6 @@
-package main.java.HashCode;
+package HashCode;
+
+import HashCode.Photo;
 
 public class Slide {
 
@@ -18,4 +20,11 @@ public class Slide {
         this.p2 = p2;
     }
 
+    @Override
+    public String toString() {
+        if(isVerticalPair)
+            return "" + p1.getId();
+        else
+            return p1.getId() + " " + p2.getId();
+    }
 }
