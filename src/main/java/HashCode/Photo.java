@@ -1,4 +1,5 @@
-package Main.java.HashCode;
+package HashCode;
+
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,4 +22,11 @@ public class Photo {
     public int getId() { return id;}
 
     public boolean isVertical() { return isVertical; }
+
+    public static int tagsInCommon(Photo p1, Photo p2) {
+        Set<String> tu = new HashSet<>(p1.tags);
+        tu.addAll(new HashSet<>(p2.tags));
+
+        return p1.tags.size() + p2.tags.size() - tu.size();
+    }
 }
