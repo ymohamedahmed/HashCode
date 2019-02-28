@@ -24,14 +24,16 @@ public class PairMaker {
                 int leastSharedTags = 99999;
 
                 for(Photo p2 : photosCopy) {
-                    int st = Photo.tagsInCommon(p, p2);
-                    if(st < leastSharedTags) {
-                        bestPair = p2;
-                        leastSharedTags = st;
-                    }
+                    if(p2.isVertical()) {
+                        int st = Photo.tagsInCommon(p, p2);
+                        if (st < leastSharedTags) {
+                            bestPair = p2;
+                            leastSharedTags = st;
+                        }
 
-                    if(leastSharedTags == 0)
-                        break;
+                        if (leastSharedTags == 0)
+                            break;
+                    }
                 }
 
                 photosCopy.remove(bestPair);
