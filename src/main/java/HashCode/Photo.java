@@ -1,4 +1,4 @@
-package HashCode;
+package main.java.HashCode;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,4 +21,6 @@ public class Photo {
     public int getId() { return id;}
 
     public boolean isVertical() { return isVertical; }
+
+
 }
