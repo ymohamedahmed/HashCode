@@ -1,4 +1,4 @@
-package HashCode;
+package Main.java.HashCode;
 
 import java.util.Collection;
 import java.util.HashSet;
