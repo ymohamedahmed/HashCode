@@ -1,7 +1,5 @@
 package HashCode;
 
-import HashCode.Photo;
-
 public class Slide {
 
     public final boolean isVerticalPair;
