@@ -17,9 +17,9 @@ class Tsp {
 
     static class SlidesEvaluator extends NodeEvaluator2 {
 
-        private ArrayList<Slide> slides;
+        private Slide[] slides;
 
-        public SlidesEvaluator(ArrayList<Slide> slides) {
+        public SlidesEvaluator(Slide[] slides) {
             this.slides = slides;
         }
 
@@ -36,28 +36,15 @@ class Tsp {
         }
     }
 
-    static void solve(ArrayList<Slide> slides) {
+    static ArrayList<Slide> solve(Set<Slide> slides) {
         RoutingModel routing = new RoutingModel(slides.size(), 1, 0);
 
         // Setting the cost function.
         // Put a permanent callback to the distance accessor here. The callback
         // has the following signature: ResultCallback2<int64, int64, int64>.
         // The two arguments are the from and to node inidices.
-        NodeEvaluator2 distances = new SlidesEvaluator(slides);
+        NodeEvaluator2 distances = new SlidesEvaluator(slides.toArray(new Slide[0]));
         routing.setArcCostEvaluatorOfAllVehicles(distances);
-
-        // Forbid node connections (randomly).
-        Random randomizer = new Random();
-        long forbidden_connections = 0;
-        while (forbidden_connections < forbidden) {
-            long from = randomizer.nextInt(size - 1);
-            long to = randomizer.nextInt(size - 1) + 1;
-            if (routing.nextVar(from).contains(to)) {
-                System.out.println("Forbidding connection " + from + " -> " + to);
-                routing.nextVar(from).removeValue(to);
-                ++forbidden_connections;
-            }
-        }
 
         // Solve, returns a solution if any (owned by RoutingModel).
         RoutingSearchParameters search_parameters =
@@ -67,6 +54,8 @@ class Tsp {
                         .build();
 
         Assignment solution = routing.solveWithParameters(search_parameters);
+        ArrayList<Slide>
+
         if (solution != null) {
             // Solution cost.
             System.out.println("Cost = " + solution.objectiveValue());
@@ -81,22 +70,4 @@ class Tsp {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        int size = 10;
-        if (args.length > 0) {
-            size = Integer.parseInt(args[0]);
-        }
-
-        int forbidden = 0;
-        if (args.length > 1) {
-            forbidden = Integer.parseInt(args[1]);
-        }
-
-        int seed = 0;
-        if (args.length > 2) {
-            seed = Integer.parseInt(args[2]);
-        }
-
-        solve(size, forbidden, seed);
-    }
 }
